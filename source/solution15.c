@@ -18,21 +18,21 @@ int comp(const void *a, const void *b)
 }
 
 int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes) {
-	*returnSize = 0;
-	if (numsSize == 0) {
-		return 0;
-	}
-	int **ret = (int **)malloc(sizeof(int *) * (numsSize + 1) * 6);
-	*returnSize = 0;
-	short left = 0;
-	short right = numsSize - 1;;
-	int target = 0;
+  *returnSize = 0;
+  if (numsSize == 0) {
+    return 0;
+  }
+  int **ret = (int **)malloc(sizeof(int *) * (numsSize + 1) * 6);
+  *returnSize = 0;
+  short left = 0;
+  short right = numsSize - 1;;
+  int target = 0;
 
-	*returnColumnSizes = malloc(sizeof(int) * (numsSize + 1) * 6);
-	qsort(nums, numsSize, sizeof(int), comp);
-	ret[*returnSize] = malloc(sizeof(int) * 3);
+  *returnColumnSizes = malloc(sizeof(int) * (numsSize + 1) * 6);
+  qsort(nums, numsSize, sizeof(int), comp);
+  ret[*returnSize] = malloc(sizeof(int) * 3);
 
-	while (left + 1 < right) {     
+  while (left + 1 < right) {     
 		int i = left + 1;
 		int j = right;
 		target = 0 - nums[left];
