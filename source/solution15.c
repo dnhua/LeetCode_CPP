@@ -32,7 +32,7 @@ int** threeSum(int* nums, int numsSize, int* returnSize, int** returnColumnSizes
 	qsort(nums, numsSize, sizeof(int), comp);
 	ret[*returnSize] = malloc(sizeof(int) * 3);
 
-	while (left + 1 < right) {
+	while (left + 1 < right) {     
 		int i = left + 1;
 		int j = right;
 		target = 0 - nums[left];
