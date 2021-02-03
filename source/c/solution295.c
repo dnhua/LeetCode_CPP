@@ -56,4 +56,7 @@ int main() {
     medianFinderAddNum(objs, 2);
     mid = medianFinderFindMedian(objs);
     printf("mid = %f\n", mid);
+    free(objs->data);
+    free(objs);
+    return 0;
 }
