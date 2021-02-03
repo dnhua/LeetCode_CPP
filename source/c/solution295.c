@@ -4,18 +4,19 @@
 
 typedef struct {
     int *data;
-    int len; 
+    int len;
+    int sorted;
 } MedianFinder;
 
 int cmp(const void * a, const void * b) {
     return ( *(int*)a - *(int*)b );
 }
 
-/** initialize your data structure here. */
 MedianFinder* medianFinderCreate() {
     MedianFinder *obj = (MedianFinder *)malloc(sizeof(MedianFinder));
     obj->data = NULL;
     obj->len = 0;
+    obj->sorted = 0;
     return obj;
 }
 
@@ -31,11 +32,18 @@ void medianFinderAddNum(MedianFinder* obj, int num) {
         free(obj->data);
         obj->data = tmp;
         obj->len++;
+        obj->sorted = 0;
     }
 }
 
 double medianFinderFindMedian(MedianFinder* obj) {
+    if (obj->sorted == 1)
+        goto out;
+
     qsort(obj->data, obj->len, sizeof(int), cmp);
+    obj->sorted = 1;
+
+out:
     if (obj->len % 2 == 0) {
         return 1.0 * (obj->data[obj->len / 2] + obj->data[obj->len / 2 - 1]) / 2;
     } else {
@@ -51,12 +59,12 @@ void medianFinderFree(MedianFinder* obj) {
 int main() {
     double mid = 0;
 
-    MedianFinder* objs = medianFinderCreate();
-    medianFinderAddNum(objs, 1);
-    medianFinderAddNum(objs, 2);
-    mid = medianFinderFindMedian(objs);
+    MedianFinder* obj = medianFinderCreate();
+    medianFinderAddNum(obj, 1);
+    medianFinderAddNum(obj, 2);
+    mid = medianFinderFindMedian(obj);
     printf("mid = %f\n", mid);
-    free(objs->data);
-    free(objs);
+    free(obj->data);
+    free(obj);
     return 0;
 }
