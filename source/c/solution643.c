@@ -4,14 +4,17 @@
 
 double findMaxAverage(int* nums, int numsSize, int k){
     double ret = INT_MIN;
+    double tmp = 0;
 
     if (k > numsSize)
         return ret;
-    for (int i = 0; i < numsSize - k + 1; i++) {
-        double tmp = 0;
-        for (int j = i; j < i + k; j++) {
-            tmp += nums[j];
-        }
+    for (int i = 0; i < k; i++) {
+        tmp += nums[i];
+    }
+    ret = tmp;
+    for (int i = k; i < numsSize; i++) {
+        tmp -= nums[i-k];
+        tmp += nums[i];
         ret = ret > tmp ? ret : tmp;
     }
     return ret / k;
